@@ -15,6 +15,20 @@
 ```
  mvn clean scala:compile compile package
 ```
+spark-submit \
+  --name test-of-spark-sql-cluter-mode \
+  --class org.apache.spark.sql.hive.my.MySparkSQLCLIDriver \
+  --master yarn \
+  --deploy-mode cluster \
+  --executor-cores 2 \
+  --executor-memory 4G \
+  --num-executors 8 \
+  --conf spark.executor.memoryOverhead=1G \
+  --conf spark.submit.deployMode=cluster \
+  my-spark-sql-cluster.jar.jar \
+  --hivevar <key>=<2022-01-16> \ #spark-sql参数放jar包后面
+  -f hdfs://path/to/xxxx.sql     #spark-sql参数放jar包后面
+
 
 详情参考：
 ```
@@ -23,3 +37,4 @@
 来源：稀土掘金
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ```
+
